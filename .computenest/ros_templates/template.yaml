@@ -229,6 +229,11 @@ Resources:
           - Ref: EcsVpc
           - Ref: VpcId
       SecurityGroupIngress:
+        - PortRange: 80/80
+          Priority: 1
+          SourceCidrIp: 0.0.0.0/0
+          IpProtocol: tcp
+          NicType: internet
         - PortRange: 8080/8080
           Priority: 1
           SourceCidrIp: 0.0.0.0/0
@@ -258,7 +263,7 @@ Resources:
         Ref: ZoneId
       SecurityGroupId:
         Ref: SecurityGroup
-      ImageId: centos_7_9_x64_20G_alibase_20230613.vhd
+      ImageId: "{{resolve:oos:aliyun/services/computenest/images/aliyun_3_2104_java_21}}"
       Password:
         Ref: InstancePassword
       InstanceType:
